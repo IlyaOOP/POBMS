@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onProcessorClick(View view)
     {
-        String result = SE.Executer("cat /proc/cpuinfo");
+        String result = ((SE.Executer("tail -n 3 /proc/cpuinfo").split(":"))[1].split("\n"))[0];
         outputTV.setText("Модель процессора:"+result);
 
         outputTV.setVisibility(View.VISIBLE);
