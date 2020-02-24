@@ -36,14 +36,6 @@
             android:onClick="onProcessorClick"
             android:text="Processor" />
 
-        <EditText
-            android:id="@+id/inputFile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="name"
-            android:inputType="textPersonName" />
-
         <Button
             android:id="@+id/butFile"
             android:layout_width="match_parent"
@@ -55,12 +47,14 @@
             android:id="@+id/butProcess"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="onProcessClick"
             android:text="Count of process" />
 
         <Button
             android:id="@+id/butMemory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="onMemoryClick"
             android:text="Memory size" />
 
         <TextView

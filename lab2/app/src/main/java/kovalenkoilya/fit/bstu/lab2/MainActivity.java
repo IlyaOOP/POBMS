@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onAllAppsClick(View view)
     {
-        String result = SE.Executer("ls -m /system/app");
+        String result = SE.Executer("ls -m /system/app");//system/data/app
         String[] apps = result.split(",");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, apps);
@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void onProcessorClick(View view)
     {
-        String result = ((SE.Executer("tail -n 3 /proc/cpuinfo").split(":"))[1].split("\n"))[0];
-        outputTV.setText("Модель процессора:"+result);
+        String result = ((SE.Executer(/*"tail -n 3*/"cat /proc/cpuinfo").split("name"))[1].split("\n"))[0];
+        outputTV.setText("Модель процессора"+result);
 
         outputTV.setVisibility(View.VISIBLE);
         lv.setVisibility(View.GONE);
@@ -55,6 +55,32 @@ public class MainActivity extends AppCompatActivity {
 
     public void onFindFileclick(View view)
     {
+        String result = SE.Executer("find /sdcard/Download/file.txt");
+        if (result.length()>1)
+            result+="файл существует";
+        outputTV.setText(result);
 
+        outputTV.setVisibility(View.VISIBLE);
+        lv.setVisibility(View.GONE);
+    }
+
+    public void onProcessClick(View view)
+    {
+        String result = "Process count: "+ Integer.toString((SE.Executer("ps").split("\n")).length);
+
+        outputTV.setText(result);
+
+        outputTV.setVisibility(View.VISIBLE);
+        lv.setVisibility(View.GONE);
+    }
+
+    public void onMemoryClick(View view)
+    {
+        String result = SE.Executer("df");
+
+        outputTV.setText(result);
+
+        outputTV.setVisibility(View.VISIBLE);
+        lv.setVisibility(View.GONE);
     }
 }
