@@ -171,8 +171,7 @@ public class MainActivity extends ListActivity {
         } catch (Exception e) {
             Log.e("Crypto", "AES encryption error");
         }
-        String result = encodedBytes.toString();
-        return result;
+        return Base64.encodeToString(encodedBytes, Base64.DEFAULT);
     }
 
     private String decrypt(String data)
@@ -184,11 +183,11 @@ public class MainActivity extends ListActivity {
         try {
             Cipher c = Cipher.getInstance("AES");
             c.init(Cipher.DECRYPT_MODE, SKS);
-            decodedBytes = c.doFinal(data.getBytes());
+            decodedBytes = c.doFinal(Base64.decode(data, Base64.DEFAULT));
         } catch (Exception e) {
-            Log.e("Crypto", "AES decryption error");
+            Log.e("Crypto", "AES decryption error:"+e.getMessage());
         }
-        return decodedBytes.toString();
+        return new String(decodedBytes);
     }
 
 }
